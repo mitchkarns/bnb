@@ -11,35 +11,18 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Organizer',
+            name='MyU',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, primary_key=True, verbose_name='ID')),
-                ('login', models.CharField(max_length=100)),
-                ('hashword_with_salt', models.CharField(max_length=120)),
-                ('first_name', models.CharField(max_length=35)),
-                ('last_name', models.CharField(max_length=35)),
-                ('region', models.CharField(max_length=100)),
-                ('num_posts', models.IntegerField(default=0)),
-                ('contact_requests', models.IntegerField(default=0)),
-                ('rating', models.IntegerField(default=0)),
-                ('picture', models.ImageField(upload_to='', blank=True)),
-                ('date_created', models.DateField(verbose_name='date created')),
+                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
+                ('password', models.CharField(verbose_name='password', max_length=128)),
+                ('last_login', models.DateTimeField(verbose_name='last login', blank=True, null=True)),
+                ('email', models.EmailField(unique=True, verbose_name='email address', max_length=255)),
+                ('date_of_birth', models.DateField()),
+                ('is_active', models.BooleanField(default=True)),
+                ('is_admin', models.BooleanField(default=False)),
             ],
-        ),
-        migrations.CreateModel(
-            name='User',
-            fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, primary_key=True, verbose_name='ID')),
-                ('login', models.CharField(max_length=100)),
-                ('hashword_with_salt', models.CharField(max_length=120)),
-                ('first_name', models.CharField(max_length=35)),
-                ('last_name', models.CharField(max_length=35)),
-                ('region', models.CharField(max_length=100)),
-                ('num_posts', models.IntegerField(default=0)),
-                ('contact_requests', models.IntegerField(default=0)),
-                ('rating', models.IntegerField(default=0)),
-                ('picture', models.ImageField(upload_to='', blank=True)),
-                ('date_created', models.DateField(verbose_name='date created')),
-            ],
+            options={
+                'abstract': False,
+            },
         ),
     ]

@@ -11,12 +11,8 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.DeleteModel(
-            name='Organizer',
-        ),
-        migrations.AddField(
-            model_name='user',
-            name='can_invite',
-            field=models.IntegerField(default=0),
+        migrations.RemoveField(
+            model_name='myu',
+            name='date_of_birth',
         ),
     ]

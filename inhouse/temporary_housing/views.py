@@ -9,7 +9,7 @@ def index(request):
 
 @login_required(login_url='/temp/login/')
 def view_all_users(request):
-    username = request.user.username
+    username = request.user.email
     return HttpResponse("Swag" + username)
 #    allUsers = UserProfile.objects.all()
 #    return render(request, "temporary_housing/users.html", {'allUsers':allUsers})
