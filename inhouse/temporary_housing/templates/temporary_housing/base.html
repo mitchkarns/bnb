@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .top{
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        .tab{
+            float:left;
+            border: 1px solid;
+        }
+        .top-right{
+            position: relative;
+            top: 0;
+        }
+        .acct{
+            float:right;
+        }
+        #logobar{
+            width: 100%;
+            display: inline-block;
+        }
+        #content{
+            height:100%;
+            width:100%;
+            border: 1px solid;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div id="logobar">
+        <div style="float: left">DxE Inhouse</div>
+        <div class="top acct">Logout</div>
+        <div class="top acct">Settings</div>
+    </div>
+    <div style="display: block">
+        <div class="top tab"><a href="google.com">Temp Housing</a></div>
+        <div class="top tab"><a>Roommates</a></div>
+        <div class="top tab">Jobs</div>
+    </div>
+
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+        Dope!
+    </div>
+
+</body>
+</html>

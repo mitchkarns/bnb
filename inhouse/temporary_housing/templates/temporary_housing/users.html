@@ -1,0 +1,6 @@
+{% extends "temporary_housing/base.html" %}
+{% block content %}
+    {% for user in allUsers %}
+        <p>{{ user.first_name }}</p>
+    {% endfor %}
+{% endblock %}
