@@ -26,16 +26,17 @@ from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager, Permi
 #     rating = models.IntegerField(default=0)
 #     picture = models.ImageField(blank=True)
 #     date_created = models.DateField('date created')
-#
-#     USERNAME_FIELD = 'email'
+# #     USERNAME_FIELD = 'email'
 #     REQUIRED_FIELDS = []
 #
 #     objects = UserProfileManager()
 #
 #     def __unicode__(self):
 #         return self.email
+
 class MyUserManager(BaseUserManager):
-    def create_user(self, email, password=None):
+    def create_user(self, email, password, first_name, last_name, region, date_created,
+                    is_org, num_posts, contact_requests, rating, picture):
         """
         Creates and saves a User with the given email, date of
         birth and password.
@@ -43,33 +44,39 @@ class MyUserManager(BaseUserManager):
         if not email:
             raise ValueError('Users must have an email address')
 
-        user = self.model(
-            email=self.normalize_email(email),
-        )
+        user = self.model(email=self.normalize_email(email), password=password, first_name=first_name,
+                          last_name=last_name, region=region, date_created=date_created, is_org=is_org,
+                          num_posts=num_posts, contact_requests=contact_requests, rating=rating, picture=picture)
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, password):
+    def create_superuser(self, email, password, first_name, last_name, region, date_created,
+                         is_org=False, num_posts=0, contact_requests=0, rating=0, picture=None):
         """
         Creates and saves a superuser with the given email, date of
         birth and password.
         """
-        user = self.create_user(email,
-            password=password,
-        )
+        user = self.create_user(email, password, first_name, last_name, region, date_created,
+                                is_org, num_posts, contact_requests, rating, picture)
         user.is_admin = True
         user.save(using=self._db)
         return user
 
 
-class MyU(AbstractBaseUser):
-    email = models.EmailField(
-        verbose_name='email address',
-        max_length=255,
-        unique=True,
-    )
+class TestProfile(AbstractBaseUser):
+    email = models.EmailField(verbose_name='email address', max_length=255, unique=True)
+    first_name = models.CharField(max_length=35)
+    last_name = models.CharField(max_length=35)
+    is_org = models.BooleanField(default=False)
+    region = models.CharField(max_length=100)
+    num_posts = models.IntegerField(default=0)
+    contact_requests = models.IntegerField(default=0)
+    rating = models.IntegerField(default=0)
+    picture = models.ImageField(blank=True)
+    date_created = models.DateField('date created')
+
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 

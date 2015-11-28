@@ -38,6 +38,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'temporary_housing',
+    'django.contrib.sites',
+    'inviter',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -102,4 +104,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-AUTH_USER_MODEL = 'temporary_housing.MyU'
+AUTH_USER_MODEL = 'temporary_housing.TestProfile'
