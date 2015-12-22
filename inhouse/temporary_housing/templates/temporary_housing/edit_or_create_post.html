@@ -1,0 +1,17 @@
+{% extends "temporary_housing/base.html" %}
+{% block content %}
+    <p>User name: {{user.first_name}}</p>
+    {% if user.num_posts < 1 %}
+        <p>You dont have any posts</p>
+        <form action="#" method="get">
+             <input type="submit" class="btn" value="Add" name="add">
+        </form>
+    {% else %}
+        <h1>{{post.region}}</h1>
+        <h2>{{post.sub_region}}</h2>
+        <p>Type: {{post.house_type}}</p>
+        <form action="#" method="get">
+            <input type="submit" class="btn" value="Delete" name="delete">
+        </form>
+    {% endif %}
+{% endblock %}

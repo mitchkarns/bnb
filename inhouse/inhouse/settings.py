@@ -39,7 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'temporary_housing',
     'django.contrib.sites',
-    'inviter',
+    'invitations',
 )
 
 MIDDLEWARE_CLASSES = (

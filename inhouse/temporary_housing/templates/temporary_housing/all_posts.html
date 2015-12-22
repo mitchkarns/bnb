@@ -1,0 +1,9 @@
+{% extends "temporary_housing/base.html" %}
+{% block content %}
+    {% for post in posts %}
+        <div style="border: 1px solid;padding: 5px; margin: 10px;">
+            <h1>Name: {{post.user.first_name|capfirst}} {{post.user.last_name|capfirst}}</h1>
+            <p>Region: {{post.region}}</p>
+        </div>
+    {% endfor %}
+{% endblock %}

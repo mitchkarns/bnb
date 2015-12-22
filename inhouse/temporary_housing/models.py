@@ -1,5 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager, PermissionsMixin)
+from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager)
+import datetime
+
 
 # class UserProfileManager(BaseUserManager):
 #     def create_user(self, email, first_name=None, last_name=None, region=None, password=None, date_created=None):
@@ -75,7 +77,7 @@ class TestProfile(AbstractBaseUser):
     contact_requests = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     picture = models.ImageField(blank=True)
-    date_created = models.DateField('date created')
+    date_created = models.DateTimeField(auto_now_add=True)
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
@@ -96,7 +98,7 @@ class TestProfile(AbstractBaseUser):
         # The user is identified by their email address
         return self.email
 
-    def __str__(self):              # __unicode__ on Python 2
+    def __str__(self):  # __unicode__ on Python 2
         return self.email
 
     def has_perm(self, perm, obj=None):
@@ -114,3 +116,26 @@ class TestProfile(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
+
+class Post(models.Model):
+    # user is UserProfile class that created this
+    # status is Boolean where true is active
+    # region is String region house is in
+    # sub_region is String sub_region house is in
+    # distance is String distance to dxe community space (empty if no community space)
+    # house_type is List of String [floor, couch, spare bed] converted by json
+    # provided is List of String [pillows, towels, shower, blankets, wifi, laundry] converted by json
+    # proximity is String distance to public transportation
+    # num_people is Integer number of people house can host
+    # date_created is datetime date created
+    user = models.OneToOneField(TestProfile)
+    status = models.BooleanField(default=True)
+    region = models.CharField(max_length=100)
+    sub_region = models.CharField(max_length=100)
+    distance = models.TextField()
+    house_type = models.TextField()
+    provided = models.TextField()
+    proximity = models.TextField()
+    num_people = models.IntegerField()
+    date_created = models.DateTimeField(auto_now_add=True)
